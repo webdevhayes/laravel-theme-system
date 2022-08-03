@@ -10,13 +10,15 @@ class CreateLaravelThemeSystemTable extends Migration
     public function up()
     {
         Schema::create('laravel_theme_systems', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id('id');
             $table->string('name');
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
 
         LaravelThemeSystem::create([
-            'name' => 'default'
+            'name' => 'default',
+            'active' => 1
         ]);
     }
 

@@ -35,6 +35,12 @@ class LaravelThemeSystemServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/laravel-theme-system.php', 'laravel-theme-system');
+
+        $this->app->singleton(LaravelThemeSystem::class, function () {
+            return new LaravelThemeSystem();
+        });
+
+        $this->app->alias(LaravelThemeSystem::class, 'laravel-theme-system');
     }
 
     /**

@@ -28,7 +28,7 @@ if (! function_exists('themeName')) {
      */
     function themeName()
     {
-        return LaravelThemeSystem::first()->name;
+        return LaravelThemeSystem::where('active', 1)->first()->name;
     }
 }
 
@@ -41,5 +41,17 @@ if (! function_exists('themeSystemAssetsPublished')) {
     function themeSystemAssetsPublished()
     {
         return is_dir(resource_path("views/vendor/laravel-theme-system/themes/default/assets"));
+    }
+}
+
+if (! function_exists('assetCache')) {
+    /**
+     * get asset and cache
+     *
+     * @return bool
+     */
+    function assetCache(string $filePath)
+    {
+        return asset($filePath).'?'.filemtime(base_path("public/{$filePath}"));
     }
 }
